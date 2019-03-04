@@ -19,7 +19,7 @@ func foo() {
 	xs := "test"
 	xt, xf := true, false
 	fmt.Println(xi, xf64, xs, xt, xf)
-	// Printfを使用する事で中身を見ることができる
+	// Printfを使用する事で中身を見ることができる、表示の際に\nを入れる
 	fmt.Printf("%T\n", xf64)
 	fmt.Printf("%T\n", xi)
 }
