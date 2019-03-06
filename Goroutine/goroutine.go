@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// sync.WaitGroup
 func goroutine(s string, wg *sync.WaitGroup) {
 	// Doneを呼ばないとエラーになる
 	defer wg.Done()
@@ -22,11 +23,39 @@ func normal(s string) {
 	}
 }
 
-func main() {
+func helloworld() {
 	var wg sync.WaitGroup
 	wg.Add(1)
 	// これで並列処理ができる
 	go goroutine("hello", &wg)
 	normal("World")
 	wg.Wait()
+}
+
+// sync.WaitGroup
+
+// channel
+
+func goroutineChan(s []int, c chan int) {
+	sum := 0
+	for _, v := range s {
+		sum += v
+	}
+	c <- sum
+}
+
+func channel() {
+	// ここに様々な情報を入れて送信して処理する
+	s := []int{1, 2, 3, 4, 5}
+	c := make(chan int)
+	go goroutineChan(s, c)
+	x := <-c
+	fmt.Println(x)
+}
+
+// channel
+
+func main() {
+	helloworld()
+	channel()
 }
