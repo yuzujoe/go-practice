@@ -109,6 +109,19 @@ func do(i interface{}) {
 
 // switch type
 
+// Stringer
+
+type Person2 struct {
+	Name string
+	Age  int
+}
+
+func (p Person2) String() string {
+	return fmt.Sprintf("My name is %v.", p.Name)
+}
+
+// Stringer
+
 func main() {
 	// v := Vertex{3, 4}
 	// fmt.Println(Area(v))
@@ -127,4 +140,7 @@ func main() {
 	do(10)
 	do("mike")
 	do(true)
+
+	ken := Person2{"Ken", 22}
+	fmt.Println(ken)
 }
