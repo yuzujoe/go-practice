@@ -122,6 +122,28 @@ func (p Person2) String() string {
 
 // Stringer
 
+// Coustom Error
+
+type UserNotFound struct {
+	Username string
+}
+
+// つける必要はないけどポインタとレシーバーは必要
+// 比較判定するため
+func (e *UserNotFound) Error() string {
+	return fmt.Sprintf("user not found: %v", e.Username)
+}
+
+func myFunc() error {
+	ok := false
+	if ok {
+		return nil
+	}
+	return &UserNotFound{Username: "Mike"}
+}
+
+// Coustom Error
+
 func main() {
 	// v := Vertex{3, 4}
 	// fmt.Println(Area(v))
@@ -143,4 +165,8 @@ func main() {
 
 	ken := Person2{"Ken", 22}
 	fmt.Println(ken)
+
+	if err := myFunc(); err != nil {
+		fmt.Println(err)
+	}
 }
