@@ -201,6 +201,29 @@ func selected() {
 
 // select
 
+// Default Selection for break
+
+func forbreak() {
+	tick := time.Tick(100 * time.Millisecond)
+	boom := time.Tick(500 * time.Millisecond)
+	// 名前を指定してbreakしたいところにさすとbreakできる
+outLoop:
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			break outLoop
+		default:
+			fmt.Println("   .")
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
+}
+
+// Default Selection for break
+
 func main() {
 	// helloworld()
 	// channel()
@@ -208,5 +231,6 @@ func main() {
 	// channelRange()
 	// prpducerConsumer()
 	// fanOut()
-	selected()
+	// selected()
+	forbreak()
 }
