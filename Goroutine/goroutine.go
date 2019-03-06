@@ -166,11 +166,47 @@ func fanOut() {
 
 // fan out fan in
 
+// select
+
+func goroutineSelect1(ch chan string) {
+	for {
+		ch <- "packt room 1"
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func goroutineSelect2(ch chan string) {
+	for {
+		ch <- "packt room 2"
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func selected() {
+	c1 := make(chan string)
+	c2 := make(chan string)
+
+	go goroutineSelect1(c1)
+	go goroutineSelect2(c2)
+
+	for {
+		select {
+		case message1 := <-c1:
+			fmt.Println(message1)
+		case message2 := <-c2:
+			fmt.Println(message2)
+		}
+	}
+}
+
+// select
+
 func main() {
 	// helloworld()
 	// channel()
 	// bufferChannel()
 	// channelRange()
 	// prpducerConsumer()
-	fanOut()
+	// fanOut()
+	selected()
 }
