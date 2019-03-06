@@ -57,6 +57,35 @@ func (i MyInt) Double() int {
 	return int(i * 2)
 }
 
+// ~non-struct~
+
+// interface
+
+// 指定したメソッドを必ず使うときにinterfaceを使う
+type Human interface {
+	Say() string
+}
+
+type Person struct {
+	Name string
+}
+
+func (p *Person) Say() string {
+	p.Name = "Mr." + p.Name
+	fmt.Println(p.Name)
+	return p.Name
+}
+
+func DriveCar(human Human) {
+	if human.Say() == "Mr.Mike" {
+		fmt.Println("Run")
+	} else {
+		fmt.Println("Get out")
+	}
+}
+
+// interface
+
 func main() {
 	// v := Vertex{3, 4}
 	// fmt.Println(Area(v))
@@ -66,4 +95,9 @@ func main() {
 
 	myInt := MyInt(10)
 	fmt.Println(myInt.Double())
+
+	var mike Human = &Person{"Mike"}
+	var x Human = &Person{"x"}
+	DriveCar(mike)
+	DriveCar(x)
 }
