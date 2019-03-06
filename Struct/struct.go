@@ -86,6 +86,29 @@ func DriveCar(human Human) {
 
 // interface
 
+// switch type
+
+// interfaceはどんな型の引数でも受け付けてくれる
+func do(i interface{}) {
+	// ii := i.(int)
+	// ii *= 2
+	// fmt.Println(ii)
+
+	// ss := i.(string)
+	// fmt.Println(ss + "!")
+
+	switch v := i.(type) {
+	case int:
+		fmt.Println(v * 2)
+	case string:
+		fmt.Println(v + "!")
+	default:
+		fmt.Printf("I don't know %T\n", v)
+	}
+}
+
+// switch type
+
 func main() {
 	// v := Vertex{3, 4}
 	// fmt.Println(Area(v))
@@ -100,4 +123,8 @@ func main() {
 	var x Human = &Person{"x"}
 	DriveCar(mike)
 	DriveCar(x)
+
+	do(10)
+	do("mike")
+	do(true)
 }
