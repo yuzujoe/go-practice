@@ -49,10 +49,21 @@ func New(x, y, z int) *Vertex3D {
 
 // ~Embedded~
 
+// ~non-struct~
+
+type MyInt int
+
+func (i MyInt) Double() int {
+	return int(i * 2)
+}
+
 func main() {
 	// v := Vertex{3, 4}
 	// fmt.Println(Area(v))
 	v := New(3, 4, 5)
 	v.Scale3D(10)
 	fmt.Println(v.Area3D())
+
+	myInt := MyInt(10)
+	fmt.Println(myInt.Double())
 }
