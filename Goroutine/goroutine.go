@@ -55,7 +55,49 @@ func channel() {
 
 // channel
 
+// Buffer Channels
+
+func bufferChannel() {
+	ch := make(chan int, 2)
+	ch <- 100
+	fmt.Println(len(ch))
+	ch <- 200
+	fmt.Println(len(ch))
+	close(ch)
+
+	for c := range ch {
+		fmt.Println(c)
+	}
+}
+
+// Buffer Channels
+
+// channel range close
+
+func goroutineClose(s []int, c chan int) {
+	sum := 0
+	for _, v := range s {
+		sum += v
+		c <- sum
+	}
+	// ここにclose入れないとエラーになる
+	close(c)
+}
+
+func channelRange() {
+	s := []int{1, 2, 3, 4, 5}
+	c := make(chan int, len(s))
+	go goroutineClose(s, c)
+	for i := range c {
+		fmt.Println(i)
+	}
+}
+
+// channel range close
+
 func main() {
-	helloworld()
-	channel()
+	// helloworld()
+	// channel()
+	// bufferChannel()
+	channelRange()
 }
