@@ -263,14 +263,37 @@ func syncMutex() {
 
 // sync.Mutex
 
+// practice
+
+func goroutinePractice(s []string, c chan string) {
+	sum := ""
+	for _, v := range s {
+		sum += v
+		c <- sum
+	}
+	close(c)
+}
+
+func practice() {
+	words := []string{"test1!", "test2!", "test3!", "test4!"}
+	c := make(chan string)
+	go goroutinePractice(words, c)
+	for w := range c {
+		fmt.Println(w)
+	}
+}
+
+// practice
+
 func main() {
-	// helloworld()
-	// channel()
-	// bufferChannel()
-	// channelRange()
-	// prpducerConsumer()
-	// fanOut()
-	// selected()
-	// forbreak()
+	helloworld()
+	channel()
+	bufferChannel()
+	channelRange()
+	prpducerConsumer()
+	fanOut()
+	selected()
+	forbreak()
 	syncMutex()
+	practice()
 }
