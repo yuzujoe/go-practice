@@ -224,6 +224,45 @@ outLoop:
 
 // Default Selection for break
 
+// sync.Mutex
+
+type Counter struct {
+	v   map[string]int
+	mux sync.Mutex
+}
+
+func (c *Counter) Inc(key string) {
+	c.mux.Lock()
+	// このunLockによって重なりのエラーを回避できる
+	defer c.mux.Unlock()
+	c.v[key]++
+}
+
+func (c *Counter) Value(key string) int {
+	c.mux.Lock()
+	defer c.mux.Unlock()
+	return c.v[key]
+}
+
+func syncMutex() {
+	c := Counter{v: make(map[string]int)}
+	// この書き方で稀に被って実行してしまってエラーが起きる
+	go func() {
+		for i := 0; i < 10; i++ {
+			c.Inc("Key")
+		}
+	}()
+	go func() {
+		for i := 0; i < 10; i++ {
+			c.Inc("Key")
+		}
+	}()
+	time.Sleep(1 * time.Second)
+	fmt.Println(c, c.Value("Key"))
+}
+
+// sync.Mutex
+
 func main() {
 	// helloworld()
 	// channel()
@@ -232,5 +271,6 @@ func main() {
 	// prpducerConsumer()
 	// fanOut()
 	// selected()
-	forbreak()
+	// forbreak()
+	syncMutex()
 }
