@@ -6,6 +6,7 @@ import (
 	// 階層フォルダにファイルを作成してmainでimportすると使える
 	"./mylib"
 	"./mylib/under"
+	"./talib"
 )
 
 func main() {
@@ -13,6 +14,8 @@ func main() {
 	fmt.Println(mylib.Average(s))
 	mylib.Say()
 	under.Hello()
+
+	talib.Talib()
 
 	person := mylib.Person{Name: "Mike", Age: 20}
 	fmt.Println(person)
