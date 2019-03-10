@@ -24,5 +24,6 @@ func main() {
 	// mylib.Match()
 	// mylib.Sort()
 	// mylib.Iota()
-	mylib.Context()
+	// mylib.Context()
+	mylib.Ioutil()
 }
