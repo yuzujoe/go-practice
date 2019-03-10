@@ -22,5 +22,6 @@ func main() {
 	// fmt.Println(mylib.Public)
 
 	// mylib.Match()
-	mylib.Sort()
+	// mylib.Sort()
+	mylib.Iota()
 }
