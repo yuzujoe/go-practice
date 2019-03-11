@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
-	thirdparty.Semaphore()
+	// thirdparty.Semaphore()
+	thirdparty.Ini()
 }
