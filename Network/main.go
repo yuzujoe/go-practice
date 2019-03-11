@@ -6,5 +6,6 @@ import (
 
 func main() {
 	// net.Http()
-	net.Json()
+	// net.Json()
+	net.Hmac()
 }
